@@ -15,9 +15,9 @@ for friend in os.listdir('friends'):
 			url = profile['profile_banner_url']
 			filename = 'banners/' + url.replace('/', '-').replace(':', '-') + '.jpg'
 			if(os.path.exists(filename)):
+				print 'already got ' + theirfriend
 				continue
 			urllib.urlretrieve(url, filename)
 		except Exception as e:
 			print "[%s] Exception: %s // %s // %s" % (time.strftime("%Y%m%d %H:%M:%S"), type(e), e, theirfriend)
-			time.sleep(1)
 			continue

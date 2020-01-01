@@ -10,7 +10,12 @@ for friend in os.listdir('friends'):
 		continue
 	for theirfriend in os.listdir('friends/' + friend):
 		f = open('friends/' + friend + '/' + theirfriend)
-		profile = json.load(f)
+		try:
+			profile = json.load(f)
+		except Exception as e:
+			print "[%s] Exception: %s // %s // %s" % (time.strftime("%Y%m%d %H:%M:%S"), type(e), e, friend + '/' + theirfriend)
+			time.sleep(1)
+			continue
 		url = profile['profile_image_url']
 		url = url.replace('_normal.', '.')
 		filename = 'avis/' + url.replace('/', '-').replace(':', '-')
@@ -20,5 +25,5 @@ for friend in os.listdir('friends'):
 			urllib.urlretrieve(url, filename)
 		except Exception as e:
 			print "[%s] Exception: %s // %s // %s" % (time.strftime("%Y%m%d %H:%M:%S"), type(e), e, theirfriend)
-			sleep(1)
+			time.sleep(1)
 			continue
