@@ -1,5 +1,10 @@
 import os, time, oauth2, json
 
+try:
+	os.mkdir('friends')
+except:
+	pass
+
 consumer = oauth2.Consumer(key=os.environ['CONSUMER_KEY'], secret=os.environ['CONSUMER_SECRET'])
 token = oauth2.Token(key=os.environ['ACCESS_KEY'], secret=os.environ['ACCESS_SECRET'])
 

@@ -1,5 +1,10 @@
 import os, json, urllib, time
 
+try:
+	os.mkdir('avis')
+except:
+	pass
+
 for friend in os.listdir('friends'):
 	if not os.path.isdir('friends/' + friend):
 		continue
@@ -9,9 +14,11 @@ for friend in os.listdir('friends'):
 		url = profile['profile_image_url']
 		url = url.replace('_normal.', '.')
 		filename = 'avis/' + url.replace('/', '-').replace(':', '-')
+		if(os.path.exists(filename)):
+			continue
 		try:
 			urllib.urlretrieve(url, filename)
-		except:
+		except Exception as e:
 			print "[%s] Exception: %s // %s // %s" % (time.strftime("%Y%m%d %H:%M:%S"), type(e), e, theirfriend)
 			sleep(1)
 			continue
