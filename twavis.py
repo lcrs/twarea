@@ -20,6 +20,7 @@ for friend in os.listdir('friends'):
 		url = url.replace('_normal.', '.')
 		filename = 'avis/' + url.replace('/', '-').replace(':', '-')
 		if(os.path.exists(filename)):
+			print 'already got ' + theirfriend
 			continue
 		try:
 			urllib.urlretrieve(url, filename)

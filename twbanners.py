@@ -10,7 +10,11 @@ for friend in os.listdir('friends'):
 		continue
 	for theirfriend in os.listdir('friends/' + friend):
 		f = open('friends/' + friend + '/' + theirfriend)
-		profile = json.load(f)
+		try:
+			profile = json.load(f)
+		except Exception as e:
+			print "[%s] Exception: %s // %s // %s" % (time.strftime("%Y%m%d %H:%M:%S"), type(e), e, friend + '/' + theirfriend)
+			continue
 		try:
 			url = profile['profile_banner_url']
 			filename = 'banners/' + url.replace('/', '-').replace(':', '-') + '.jpg'
